@@ -5,20 +5,23 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>La Esquina del Sabor · Menú</title>
 <meta name="description" content="Menú de La Esquina del Sabor: perros calientes, hamburguesas, pepitos, enrollados y bebidas.">
-<meta name="theme-color" content="#170828">
+<meta name="theme-color" content="#140624">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Anton&family=Archivo:wght@500;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Archivo:wght@500;700;800&family=Permanent+Marker&display=swap" rel="stylesheet">
 <style>
   :root {
-    --fondo: #170828;
-    --fondo-2: #241040;
+    --fondo: #140624;
+    --fondo-2: #22093d;
     --magenta: #ff2e93;
-    --magenta-oscuro: #c4126c;
+    --violeta: #8b3dff;
     --amarillo: #ffd23f;
     --texto: #fbf6ff;
     --suave: #c9b6e4;
-    --linea: rgba(255, 255, 255, .12);
+    --linea: rgba(255, 255, 255, .14);
+    --neon: 0 0 6px rgba(255, 46, 147, .9), 0 0 18px rgba(255, 46, 147, .55), 0 0 42px rgba(255, 46, 147, .35);
+    /* Ladrillo: patrón de 64x28 con la segunda hilada corrida */
+    --ladrillo: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='64' height='56'%3E%3Cg fill='none' stroke='%23ffffff' stroke-opacity='.05' stroke-width='2'%3E%3Cpath d='M0 1h64M0 29h64M1 1v28M33 29v27'/%3E%3C/g%3E%3C/svg%3E");
   }
   * { box-sizing: border-box; margin: 0; padding: 0; }
   html { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
@@ -28,313 +31,456 @@
     font-family: "Archivo", system-ui, sans-serif;
     -webkit-font-smoothing: antialiased;
   }
+  img { display: block; max-width: 100%; }
 
   .hoja {
-    max-width: 760px;
+    position: relative;
+    max-width: 780px;
     margin: 0 auto;
-    padding: 32px 16px 40px;
+    padding: 36px 16px 44px;
+    overflow: hidden;
     background:
-      radial-gradient(120% 60% at 100% 0%, rgba(255, 46, 147, .22), transparent 60%),
-      radial-gradient(90% 50% at 0% 100%, rgba(122, 60, 255, .25), transparent 60%),
+      radial-gradient(90% 45% at 105% -5%, rgba(255, 46, 147, .30), transparent 65%),
+      radial-gradient(80% 45% at -10% 105%, rgba(139, 61, 255, .32), transparent 65%),
+      radial-gradient(60% 30% at 50% 50%, rgba(255, 210, 63, .04), transparent 70%),
+      var(--ladrillo),
       var(--fondo);
   }
 
-  /* Encabezado */
-  .marca { text-align: center; margin-bottom: 28px; }
-  .marca .la {
-    font-family: "Anton", sans-serif;
-    font-size: 22px;
-    letter-spacing: .32em;
-    color: var(--amarillo);
-    display: block;
+  /* ---------- Logo: placa de esquina ---------- */
+  .placa {
+    position: relative;
+    display: inline-block;
+    padding: 12px 30px 14px;
+    background: linear-gradient(180deg, #ff4aa2, #e8157c);
+    border-radius: 14px;
+    box-shadow:
+      inset 0 0 0 4px var(--fondo),
+      inset 0 0 0 7px #fff,
+      0 0 30px rgba(255, 46, 147, .55),
+      0 14px 30px rgba(0, 0, 0, .45);
+    transform: rotate(-2.5deg);
+    text-align: center;
   }
-  .marca h1 {
-    font-family: "Anton", sans-serif;
-    font-weight: 400;
-    font-size: clamp(48px, 13vw, 84px);
-    line-height: .92;
-    text-transform: uppercase;
-    color: var(--texto);
-    text-shadow: 0 0 24px rgba(255, 46, 147, .55);
+  .placa::before, .placa::after {
+    /* tornillos */
+    content: "";
+    position: absolute;
+    top: 50%;
+    width: 9px; height: 9px;
+    margin-top: -4.5px;
+    border-radius: 50%;
+    background: radial-gradient(circle at 35% 35%, #fff, #b9a9c9 60%, #6d5a80);
   }
-  .marca h1 em { font-style: normal; color: var(--magenta); }
-  .marca p {
-    margin-top: 12px;
-    color: var(--suave);
-    font-weight: 700;
+  .placa::before { left: 13px; }
+  .placa::after { right: 13px; }
+  .placa .esq {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    font-family: "Anton", sans-serif;
     font-size: 15px;
-    letter-spacing: .04em;
+    letter-spacing: .38em;
+    color: var(--fondo);
+  }
+  .placa .esq svg { width: 15px; height: 15px; }
+  .placa .nombre {
+    display: block;
+    font-family: "Anton", sans-serif;
+    font-size: clamp(46px, 12vw, 74px);
+    line-height: .95;
+    letter-spacing: .01em;
+    text-transform: uppercase;
+    color: #fff;
+    text-shadow: 3px 3px 0 var(--fondo);
   }
 
-  /* Secciones */
-  .grupo { margin-top: 26px; break-inside: avoid; }
-  .grupo h2 {
-    display: inline-block;
+  .cabecera { text-align: center; position: relative; z-index: 2; }
+  .lema {
+    margin-top: 18px;
+    font-family: "Permanent Marker", cursive;
+    font-size: 24px;
+    color: var(--amarillo);
+    transform: rotate(-2deg);
+  }
+  .lema-sub {
+    margin-top: 6px;
+    color: var(--suave);
+    font-weight: 700;
+    font-size: 13px;
+    letter-spacing: .22em;
+    text-transform: uppercase;
+  }
+
+  /* ---------- Secciones ---------- */
+  .seccion { position: relative; margin-top: 34px; break-inside: avoid; }
+  .banda {
+    position: relative;
+    display: flex;
+    align-items: flex-end;
+    gap: 12px;
+    min-height: 64px;
+    padding-bottom: 10px;
+    margin-bottom: 8px;
+  }
+  .banda::after {
+    /* tubo de neón */
+    content: "";
+    position: absolute;
+    left: 0; right: 0; bottom: 0;
+    height: 3px;
+    border-radius: 3px;
+    background: var(--magenta);
+    box-shadow: var(--neon);
+  }
+  .num {
+    font-family: "Anton", sans-serif;
+    font-size: 46px;
+    line-height: .9;
+    color: transparent;
+    -webkit-text-stroke: 1.6px var(--amarillo);
+  }
+  .banda h2 {
     font-family: "Anton", sans-serif;
     font-weight: 400;
-    font-size: 26px;
-    letter-spacing: .03em;
+    font-size: clamp(34px, 9vw, 46px);
+    line-height: .9;
     text-transform: uppercase;
-    background: var(--magenta);
     color: #fff;
-    padding: 4px 18px 3px;
-    border-radius: 999px;
-    box-shadow: 0 6px 18px rgba(255, 46, 147, .35);
-    margin-bottom: 10px;
+    text-shadow: 0 0 18px rgba(255, 46, 147, .6);
   }
-  .grupo h2 small {
-    font-family: "Archivo", sans-serif;
-    font-weight: 800;
-    font-size: 13px;
-    opacity: .85;
-    margin-left: 6px;
+  .banda .foto {
+    position: absolute;
+    right: -8px;
+    bottom: 4px;
+    z-index: 1;
+    filter: drop-shadow(0 16px 18px rgba(0, 0, 0, .55)) drop-shadow(0 0 22px rgba(255, 46, 147, .35));
+    pointer-events: none;
   }
+  .perros .foto { width: 46%; max-width: 330px; transform: rotate(-5deg); }
+  .pepitos .foto { width: 44%; max-width: 320px; transform: rotate(4deg); }
+
+  .columnas { display: grid; gap: 0 34px; position: relative; z-index: 2; }
+  .sub {
+    font-family: "Permanent Marker", cursive;
+    font-size: 19px;
+    color: var(--amarillo);
+    margin: 10px 0 2px;
+    transform: rotate(-1.5deg);
+    transform-origin: left;
+  }
+
   ul { list-style: none; }
   li {
     display: flex;
-    align-items: baseline;
-    gap: 10px;
-    padding: 9px 2px;
-    border-bottom: 1px dashed var(--linea);
+    align-items: center;
+    gap: 8px;
+    padding: 6px 0;
   }
-  li:last-child { border-bottom: 0; }
   .plato {
     font-weight: 800;
-    font-size: 18px;
+    font-size: 17px;
     text-transform: uppercase;
     letter-spacing: .01em;
-  }
-  .plato span {
-    display: block;
-    font-weight: 500;
-    font-size: 13px;
-    text-transform: none;
-    color: var(--suave);
-    letter-spacing: 0;
-    margin-top: 2px;
-  }
-  .precio {
-    margin-left: auto;
-    font-family: "Anton", sans-serif;
-    font-size: 22px;
-    color: var(--amarillo);
     white-space: nowrap;
-    font-variant-numeric: tabular-nums;
   }
-  .precio.consultar {
-    font-family: "Archivo", sans-serif;
-    font-weight: 700;
-    font-size: 13px;
-    color: var(--suave);
+  .puntos {
+    flex: 1;
+    min-width: 12px;
+    border-bottom: 2px dotted rgba(255, 255, 255, .22);
+    transform: translateY(5px);
+  }
+  /* Precio en óvalo blanco escrito a mano, como en el cartel del puesto */
+  .precio {
+    flex: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 52px;
+    height: 34px;
+    border-radius: 50%;
+    background: #fff;
+    color: var(--fondo);
+    font-family: "Permanent Marker", cursive;
+    font-size: 17px;
+    line-height: 1;
+    box-shadow: 0 3px 0 rgba(0, 0, 0, .35);
+    transform: rotate(-5deg);
+  }
+  li:nth-child(even) .precio { transform: rotate(4deg); }
+  li:nth-child(3n) .precio { transform: rotate(-2deg); }
+  .precio i { font-family: "Archivo", sans-serif; font-style: normal; font-weight: 800; font-size: .78em; margin-left: 1px; }
+  .precio.consultar { width: auto; padding: 0 10px; border-radius: 999px; font-size: 13px; }
+
+  .hamburguesa-foto {
+    margin: 18px auto 0;
+    width: 88%;
+    max-width: 300px;
+    transform: rotate(-3deg);
+    filter: drop-shadow(0 18px 20px rgba(0, 0, 0, .6)) drop-shadow(0 0 26px rgba(255, 46, 147, .35));
   }
 
-  .columnas { display: grid; gap: 0 36px; }
-
-  /* Pie */
+  /* ---------- Pie ---------- */
   .pie {
+    position: relative;
+    z-index: 2;
     margin-top: 34px;
     display: flex;
     gap: 20px;
     align-items: center;
-    background: var(--fondo-2);
-    border: 1px solid var(--linea);
+    background: rgba(34, 9, 61, .85);
+    border: 2px solid var(--magenta);
+    box-shadow: var(--neon);
     border-radius: 22px;
     padding: 18px 20px;
     break-inside: avoid;
   }
-  .pie img { width: 132px; height: 132px; border-radius: 12px; background: #fff; padding: 8px; flex: none; }
+  .pie .qr { width: 128px; height: 128px; border-radius: 14px; background: #fff; padding: 7px; flex: none; }
   .pie strong {
     display: block;
     font-family: "Anton", sans-serif;
     font-weight: 400;
-    font-size: 26px;
+    font-size: 28px;
     text-transform: uppercase;
-    line-height: 1.05;
+    line-height: 1.02;
   }
   .pie strong em { font-style: normal; color: var(--amarillo); }
   .pie p { color: var(--suave); font-weight: 500; font-size: 15px; margin-top: 6px; line-height: 1.4; }
-  .pie .pago {
+  .pago {
     display: inline-block;
     margin-top: 10px;
     background: var(--amarillo);
     color: var(--fondo);
     font-weight: 800;
     font-size: 13px;
-    letter-spacing: .06em;
+    letter-spacing: .08em;
     text-transform: uppercase;
-    padding: 5px 12px;
+    padding: 6px 13px;
     border-radius: 999px;
   }
-  .nota { text-align: center; color: var(--suave); font-size: 12px; margin-top: 18px; }
+  .nota { position: relative; z-index: 2; text-align: center; color: var(--suave); font-size: 12px; margin-top: 16px; }
+  .creditos { position: relative; z-index: 2; text-align: center; color: rgba(201, 182, 228, .55); font-size: 9px; margin-top: 6px; line-height: 1.4; }
 
   @media (min-width: 640px) {
-    .hoja { padding: 48px 40px 56px; }
+    .hoja { padding: 52px 40px 56px; }
     .columnas { grid-template-columns: 1fr 1fr; }
   }
+  @media (max-width: 639px) {
+    .perros .foto, .pepitos .foto { position: relative; right: auto; bottom: auto; width: 82%; margin: 0 auto -6px; }
+    .banda { flex-wrap: wrap; }
+    .banda .foto { order: -1; flex-basis: 100%; }
+    .plato { font-size: 15px; white-space: normal; }
+  }
 
-  /* En pantalla, sin QR (ya lo escanearon) */
-  @media screen { .solo-impreso { display: none; } }
+  @media screen { .solo-impreso { display: none !important; } }
 
-  /* Impresión: carta/A4 en dos páginas */
+  /* ---------- Impresión: A4, dos páginas ---------- */
   @page { size: A4; margin: 0; }
   @media print {
-    body { background: var(--fondo); }
     .hoja {
       max-width: none;
       width: 210mm;
       height: 297mm;
-      padding: 14mm 14mm 12mm;
-      overflow: hidden;
+      padding: 13mm 13mm 9mm;
       page-break-after: always;
       break-after: page;
     }
     .hoja:last-child { page-break-after: auto; break-after: auto; }
-    .columnas { grid-template-columns: 1fr 1fr; }
-    .marca { margin-bottom: 8mm; }
-    .marca h1 { font-size: 64px; }
-    .marca.chica h1 { font-size: 40px; }
-    .marca.chica .la { font-size: 16px; }
-    .marca.chica p { display: none; }
-    .grupo { margin-top: 6mm; }
-    li { padding: 5px 2px; }
-    .pie { margin-top: 7mm; padding: 14px 18px; }
-    .nota { margin-top: 10px; }
-    .solo-pantalla { display: none; }
+    .columnas { grid-template-columns: 1fr 1fr; gap: 0 9mm; }
+    .placa .nombre { font-size: 62px; }
+    .lema { font-size: 21px; margin-top: 12px; }
+    .seccion { margin-top: 7mm; }
+    .banda { min-height: 0; padding-bottom: 7px; }
+    .num { font-size: 36px; }
+    .banda h2 { font-size: 38px; }
+    li { padding: 3px 0; }
+    .plato { font-size: 13.5px; }
+    .precio { width: 44px; height: 27px; font-size: 14px; }
+    .sub { font-size: 16px; margin: 6px 0 0; }
+    .perros { margin-top: 12mm; }
+    .perros .foto { width: 74mm; bottom: -2mm; right: -3mm; }
+    .pepitos { margin-top: 6mm; }
+    .pepitos .foto { width: 70mm; bottom: -1mm; right: -3mm; }
+    .placa-chica { text-align: left; }
+    .seccion + .seccion { margin-top: 9mm; }
+    .hoja + .hoja li { padding: 4px 0; }
+    .hamburguesa-foto { width: 72mm; margin-top: 6mm; }
+    .placa-chica .placa { padding: 8px 24px 10px; }
+    .placa-chica .placa .nombre { font-size: 38px; }
+    .placa-chica .placa .esq { font-size: 11px; }
+    .pie { margin-top: 8mm; padding: 12px 16px; }
+    .pie .qr { width: 112px; height: 112px; }
+    .pie strong { font-size: 25px; }
+    .nota { margin-top: 8px; }
+    .solo-pantalla { display: none !important; }
   }
 </style>
 </head>
 <body>
 
+<!-- Ícono de esquina: dos calles que se cruzan -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="esquina" viewBox="0 0 16 16"><path d="M2 1v13h13" fill="none" stroke="currentColor" stroke-width="3"/><circle cx="8.5" cy="7.5" r="2.6" fill="currentColor"/></symbol>
+</svg>
+
 <!-- Página 1 -->
 <section class="hoja">
-  <header class="marca">
-    <span class="la">LA ESQUINA</span>
-    <h1>del <em>Sabor</em></h1>
-    <p>Perros · Hamburguesas · Pepitos · Enrollados</p>
+  <header class="cabecera">
+    <div class="placa">
+      <span class="esq"><svg><use href="#esquina"/></svg>LA ESQUINA</span>
+      <span class="nombre">del Sabor</span>
+    </div>
+    <p class="lema">Tu parada de confianza</p>
+    <p class="lema-sub">Perros · Hamburguesas · Pepitos · Enrollados</p>
   </header>
 
-  <div class="grupo">
-    <h2>Perros calientes</h2>
+  <section class="seccion perros">
+    <div class="banda">
+      <span class="num">01</span><h2>Perros<br>calientes</h2>
+      <img class="foto" src="img/perro.webp" alt="Perro caliente con salsas y queso rallado">
+    </div>
     <div class="columnas">
       <ul>
-        <li><div class="plato">Sencillo</div><div class="precio">1,5$</div></li>
-        <li><div class="plato">Con queso</div><div class="precio">2$</div></li>
-        <li><div class="plato">Aguacate y queso</div><div class="precio">3$</div></li>
-        <li><div class="plato">Full</div><div class="precio">4$</div></li>
-        <li><div class="plato">Super</div><div class="precio">3,5$</div></li>
-        <li><div class="plato">Polaco</div><div class="precio">5$</div></li>
-        <li><div class="plato">Alemán</div><div class="precio">5$</div></li>
-        <li><div class="plato">Chistorra</div><div class="precio">5$</div></li>
+        <li><span class="plato">Sencillo</span><span class="puntos"></span><span class="precio">1,5<i>$</i></span></li>
+        <li><span class="plato">Con queso</span><span class="puntos"></span><span class="precio">2<i>$</i></span></li>
+        <li><span class="plato">Aguacate y queso</span><span class="puntos"></span><span class="precio">3<i>$</i></span></li>
+        <li><span class="plato">Full</span><span class="puntos"></span><span class="precio">4<i>$</i></span></li>
+        <li><span class="plato">Super</span><span class="puntos"></span><span class="precio">3,5<i>$</i></span></li>
+        <li><span class="plato">Polaco</span><span class="puntos"></span><span class="precio">5<i>$</i></span></li>
+        <li><span class="plato">Alemán</span><span class="puntos"></span><span class="precio">5<i>$</i></span></li>
+        <li><span class="plato">Chistorra</span><span class="puntos"></span><span class="precio">5<i>$</i></span></li>
       </ul>
       <ul>
-        <li><div class="plato">Plumrose</div><div class="precio">3$</div></li>
-        <li><div class="plato">Gey</div><div class="precio">5$</div></li>
-        <li><div class="plato">Parrilla</div><div class="precio">6$</div></li>
-        <li><div class="plato">Pollo</div><div class="precio">5$</div></li>
-        <li><div class="plato">Carne</div><div class="precio">5$</div></li>
-        <li><div class="plato">Chuleta</div><div class="precio">5$</div></li>
-        <li><div class="plato">Jumbo</div><div class="precio">6$</div></li>
-        <li><div class="plato">Choriperro</div><div class="precio">15$</div></li>
+        <li><span class="plato">Plumrose</span><span class="puntos"></span><span class="precio">3<i>$</i></span></li>
+        <li><span class="plato">Gey</span><span class="puntos"></span><span class="precio">5<i>$</i></span></li>
+        <li><span class="plato">Parrilla</span><span class="puntos"></span><span class="precio">6<i>$</i></span></li>
+        <li><span class="plato">Pollo</span><span class="puntos"></span><span class="precio">5<i>$</i></span></li>
+        <li><span class="plato">Carne</span><span class="puntos"></span><span class="precio">5<i>$</i></span></li>
+        <li><span class="plato">Chuleta</span><span class="puntos"></span><span class="precio">5<i>$</i></span></li>
+        <li><span class="plato">Jumbo</span><span class="puntos"></span><span class="precio">6<i>$</i></span></li>
+        <li><span class="plato">Choriperro</span><span class="puntos"></span><span class="precio">15<i>$</i></span></li>
       </ul>
     </div>
-  </div>
+  </section>
 
-  <div class="columnas">
-    <div class="grupo">
-      <h2>Hamburguesas</h2>
-      <ul>
-        <li><div class="plato">Carne</div><div class="precio">6$</div></li>
-        <li><div class="plato">Especial de carne</div><div class="precio">7$</div></li>
-        <li><div class="plato">Pollo</div><div class="precio">8$</div></li>
-        <li><div class="plato">Chuleta</div><div class="precio">8$</div></li>
-        <li><div class="plato">Chorizo</div><div class="precio">6$</div></li>
-      </ul>
+  <section class="seccion">
+    <div class="banda">
+      <span class="num">02</span><h2>Hamburguesas</h2>
     </div>
-    <div class="grupo">
-      <h2>Hamburguesas <small>mixtas</small></h2>
-      <ul>
-        <li><div class="plato">Carne / pollo</div><div class="precio">12$</div></li>
-        <li><div class="plato">Pollo / chuleta</div><div class="precio">12$</div></li>
-        <li><div class="plato">Carne / chuleta</div><div class="precio">12$</div></li>
-        <li><div class="plato">Pollo / chorizo</div><div class="precio">12$</div></li>
-        <li><div class="plato">Carne / chorizo</div><div class="precio">12$</div></li>
-        <li><div class="plato">Doble carne</div><div class="precio">10$</div></li>
-        <li><div class="plato">La 4 quesos</div><div class="precio">10$</div></li>
-        <li><div class="plato">La llanera</div><div class="precio">10$</div></li>
-        <li><div class="plato">La perversa</div><div class="precio">16$</div></li>
-      </ul>
+    <div class="columnas">
+      <div>
+        <p class="sub">Clásicas</p>
+        <ul>
+          <li><span class="plato">Carne</span><span class="puntos"></span><span class="precio">6<i>$</i></span></li>
+          <li><span class="plato">Especial de carne</span><span class="puntos"></span><span class="precio">7<i>$</i></span></li>
+          <li><span class="plato">Pollo</span><span class="puntos"></span><span class="precio">8<i>$</i></span></li>
+          <li><span class="plato">Chuleta</span><span class="puntos"></span><span class="precio">8<i>$</i></span></li>
+          <li><span class="plato">Chorizo</span><span class="puntos"></span><span class="precio">6<i>$</i></span></li>
+        </ul>
+        <img class="hamburguesa-foto" src="img/hamburguesa.webp" alt="Hamburguesa con queso">
+      </div>
+      <div>
+        <p class="sub">Mixtas</p>
+        <ul>
+          <li><span class="plato">Carne / pollo</span><span class="puntos"></span><span class="precio">12<i>$</i></span></li>
+          <li><span class="plato">Pollo / chuleta</span><span class="puntos"></span><span class="precio">12<i>$</i></span></li>
+          <li><span class="plato">Carne / chuleta</span><span class="puntos"></span><span class="precio">12<i>$</i></span></li>
+          <li><span class="plato">Pollo / chorizo</span><span class="puntos"></span><span class="precio">12<i>$</i></span></li>
+          <li><span class="plato">Carne / chorizo</span><span class="puntos"></span><span class="precio">12<i>$</i></span></li>
+          <li><span class="plato">Doble carne</span><span class="puntos"></span><span class="precio">10<i>$</i></span></li>
+          <li><span class="plato">La 4 quesos</span><span class="puntos"></span><span class="precio">10<i>$</i></span></li>
+          <li><span class="plato">La llanera</span><span class="puntos"></span><span class="precio">10<i>$</i></span></li>
+          <li><span class="plato">La perversa</span><span class="puntos"></span><span class="precio">16<i>$</i></span></li>
+        </ul>
+      </div>
     </div>
-  </div>
+  </section>
 </section>
 
 <!-- Página 2 -->
 <section class="hoja">
-  <header class="marca chica solo-impreso">
-    <span class="la">LA ESQUINA</span>
-    <h1>del <em>Sabor</em></h1>
+  <header class="cabecera placa-chica solo-impreso">
+    <div class="placa">
+      <span class="esq"><svg><use href="#esquina"/></svg>LA ESQUINA</span>
+      <span class="nombre">del Sabor</span>
+    </div>
   </header>
 
-  <div class="columnas">
-    <div class="grupo">
-      <h2>Pepitos</h2>
-      <ul>
-        <li><div class="plato">Pollo</div><div class="precio">13$</div></li>
-        <li><div class="plato">Carne</div><div class="precio">13$</div></li>
-        <li><div class="plato">Chuleta</div><div class="precio">13$</div></li>
-        <li><div class="plato">Chorizo</div><div class="precio">13$</div></li>
-        <li><div class="plato">Mini pepito</div><div class="precio">9$</div></li>
-      </ul>
+  <section class="seccion pepitos">
+    <div class="banda">
+      <span class="num">03</span><h2>Pepitos</h2>
+      <img class="foto" src="img/pepito.webp" alt="Pepito de carne en pan">
     </div>
-    <div class="grupo">
-      <h2>Pepitos <small>mixtos</small></h2>
-      <ul>
-        <li><div class="plato">Carne / pollo</div><div class="precio">15$</div></li>
-        <li><div class="plato">Pollo / chuleta</div><div class="precio">15$</div></li>
-        <li><div class="plato">Chuleta / chorizo</div><div class="precio">15$</div></li>
-        <li><div class="plato">Carne / chuleta</div><div class="precio">15$</div></li>
-        <li><div class="plato">Explosivo</div><div class="precio">18$</div></li>
-      </ul>
+    <div class="columnas">
+      <div>
+        <p class="sub">Clásicos</p>
+        <ul>
+          <li><span class="plato">Pollo</span><span class="puntos"></span><span class="precio">13<i>$</i></span></li>
+          <li><span class="plato">Carne</span><span class="puntos"></span><span class="precio">13<i>$</i></span></li>
+          <li><span class="plato">Chuleta</span><span class="puntos"></span><span class="precio">13<i>$</i></span></li>
+          <li><span class="plato">Chorizo</span><span class="puntos"></span><span class="precio">13<i>$</i></span></li>
+          <li><span class="plato">Mini pepito</span><span class="puntos"></span><span class="precio">9<i>$</i></span></li>
+        </ul>
+      </div>
+      <div>
+        <p class="sub">Mixtos</p>
+        <ul>
+          <li><span class="plato">Carne / pollo</span><span class="puntos"></span><span class="precio">15<i>$</i></span></li>
+          <li><span class="plato">Pollo / chuleta</span><span class="puntos"></span><span class="precio">15<i>$</i></span></li>
+          <li><span class="plato">Chuleta / chorizo</span><span class="puntos"></span><span class="precio">15<i>$</i></span></li>
+          <li><span class="plato">Carne / chuleta</span><span class="puntos"></span><span class="precio">15<i>$</i></span></li>
+          <li><span class="plato">Explosivo</span><span class="puntos"></span><span class="precio">18<i>$</i></span></li>
+        </ul>
+      </div>
     </div>
-  </div>
+  </section>
 
-  <div class="columnas">
-    <div class="grupo">
-      <h2>Enrollados</h2>
-      <ul>
-        <li><div class="plato">Pollo</div><div class="precio">9$</div></li>
-        <li><div class="plato">Carne</div><div class="precio">9$</div></li>
-        <li><div class="plato">Chuleta</div><div class="precio">9$</div></li>
-      </ul>
+  <section class="seccion enrollados">
+    <div class="banda">
+      <span class="num">04</span><h2>Enrollados</h2>
     </div>
-    <div class="grupo">
-      <h2>Enrollados <small>mixtos</small></h2>
-      <ul>
-        <li><div class="plato">Carne / pollo</div><div class="precio">9$</div></li>
-        <li><div class="plato">Chuleta / pollo</div><div class="precio">9$</div></li>
-        <li><div class="plato">Carne / chuleta</div><div class="precio">9$</div></li>
-        <li><div class="plato">Chuleta / chorizo</div><div class="precio">9$</div></li>
-      </ul>
+    <div class="columnas">
+      <div>
+        <p class="sub">Clásicos</p>
+        <ul>
+          <li><span class="plato">Pollo</span><span class="puntos"></span><span class="precio">9<i>$</i></span></li>
+          <li><span class="plato">Carne</span><span class="puntos"></span><span class="precio">9<i>$</i></span></li>
+          <li><span class="plato">Chuleta</span><span class="puntos"></span><span class="precio">9<i>$</i></span></li>
+        </ul>
+      </div>
+      <div>
+        <p class="sub">Mixtos</p>
+        <ul>
+          <li><span class="plato">Carne / pollo</span><span class="puntos"></span><span class="precio">9<i>$</i></span></li>
+          <li><span class="plato">Chuleta / pollo</span><span class="puntos"></span><span class="precio">9<i>$</i></span></li>
+          <li><span class="plato">Carne / chuleta</span><span class="puntos"></span><span class="precio">9<i>$</i></span></li>
+          <li><span class="plato">Chuleta / chorizo</span><span class="puntos"></span><span class="precio">9<i>$</i></span></li>
+        </ul>
+      </div>
     </div>
-  </div>
+  </section>
 
-  <div class="grupo">
-    <h2>Bebidas</h2>
+  <section class="seccion">
+    <div class="banda">
+      <span class="num">05</span><h2>Bebidas</h2>
+    </div>
     <div class="columnas">
       <ul>
-        <li><div class="plato">Refresco botella</div><div class="precio">1,5$</div></li>
-        <li><div class="plato">Refresco de litro</div><div class="precio">2,5$</div></li>
-        <li><div class="plato">Refresco de lata</div><div class="precio">2$</div></li>
+        <li><span class="plato">Refresco botella</span><span class="puntos"></span><span class="precio">1,5<i>$</i></span></li>
+        <li><span class="plato">Refresco de litro</span><span class="puntos"></span><span class="precio">2,5<i>$</i></span></li>
+        <li><span class="plato">Refresco de lata</span><span class="puntos"></span><span class="precio">2<i>$</i></span></li>
       </ul>
       <ul>
-        <li><div class="plato">Agua</div><div class="precio">1$</div></li>
-        <li><div class="plato">Malta</div><div class="precio">1$</div></li>
-        <li><div class="plato">Gatorade</div><div class="precio consultar">Preguntar</div></li>
+        <li><span class="plato">Agua</span><span class="puntos"></span><span class="precio">1<i>$</i></span></li>
+        <li><span class="plato">Malta</span><span class="puntos"></span><span class="precio">1<i>$</i></span></li>
+        <li><span class="plato">Gatorade</span><span class="puntos"></span><span class="precio consultar">Preguntar</span></li>
       </ul>
     </div>
-  </div>
+  </section>
 
   <div class="pie">
-    <img class="solo-impreso" src="qr-menu.svg" alt="Código QR del menú">
+    <img class="qr solo-impreso" src="qr-menu.svg" alt="Código QR del menú">
     <div>
       <strong>Pregunta por <em>las promos</em> del día</strong>
       <p class="solo-impreso">Escanea el código y lleva el menú en tu teléfono.</p>
@@ -342,7 +488,8 @@
       <span class="pago">Aceptamos Pago Móvil</span>
     </div>
   </div>
-  <p class="nota">Precios en dólares, sujetos a cambio.</p>
+  <p class="nota">Precios en dólares, sujetos a cambio. Fotos de referencia.</p>
+  <p class="creditos">Fotos: PapiPijuan (CC BY-SA 4.0), Reixrb (CC BY-SA 3.0), vía Wikimedia Commons; Renee Comet / NCI (dominio público).</p>
 </section>
 
 </body>
