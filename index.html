@@ -1,0 +1,349 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>La Esquina del Sabor · Menú</title>
+<meta name="description" content="Menú de La Esquina del Sabor: perros calientes, hamburguesas, pepitos, enrollados y bebidas.">
+<meta name="theme-color" content="#170828">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Archivo:wght@500;700;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --fondo: #170828;
+    --fondo-2: #241040;
+    --magenta: #ff2e93;
+    --magenta-oscuro: #c4126c;
+    --amarillo: #ffd23f;
+    --texto: #fbf6ff;
+    --suave: #c9b6e4;
+    --linea: rgba(255, 255, 255, .12);
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  body {
+    background: var(--fondo);
+    color: var(--texto);
+    font-family: "Archivo", system-ui, sans-serif;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .hoja {
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 32px 16px 40px;
+    background:
+      radial-gradient(120% 60% at 100% 0%, rgba(255, 46, 147, .22), transparent 60%),
+      radial-gradient(90% 50% at 0% 100%, rgba(122, 60, 255, .25), transparent 60%),
+      var(--fondo);
+  }
+
+  /* Encabezado */
+  .marca { text-align: center; margin-bottom: 28px; }
+  .marca .la {
+    font-family: "Anton", sans-serif;
+    font-size: 22px;
+    letter-spacing: .32em;
+    color: var(--amarillo);
+    display: block;
+  }
+  .marca h1 {
+    font-family: "Anton", sans-serif;
+    font-weight: 400;
+    font-size: clamp(48px, 13vw, 84px);
+    line-height: .92;
+    text-transform: uppercase;
+    color: var(--texto);
+    text-shadow: 0 0 24px rgba(255, 46, 147, .55);
+  }
+  .marca h1 em { font-style: normal; color: var(--magenta); }
+  .marca p {
+    margin-top: 12px;
+    color: var(--suave);
+    font-weight: 700;
+    font-size: 15px;
+    letter-spacing: .04em;
+  }
+
+  /* Secciones */
+  .grupo { margin-top: 26px; break-inside: avoid; }
+  .grupo h2 {
+    display: inline-block;
+    font-family: "Anton", sans-serif;
+    font-weight: 400;
+    font-size: 26px;
+    letter-spacing: .03em;
+    text-transform: uppercase;
+    background: var(--magenta);
+    color: #fff;
+    padding: 4px 18px 3px;
+    border-radius: 999px;
+    box-shadow: 0 6px 18px rgba(255, 46, 147, .35);
+    margin-bottom: 10px;
+  }
+  .grupo h2 small {
+    font-family: "Archivo", sans-serif;
+    font-weight: 800;
+    font-size: 13px;
+    opacity: .85;
+    margin-left: 6px;
+  }
+  ul { list-style: none; }
+  li {
+    display: flex;
+    align-items: baseline;
+    gap: 10px;
+    padding: 9px 2px;
+    border-bottom: 1px dashed var(--linea);
+  }
+  li:last-child { border-bottom: 0; }
+  .plato {
+    font-weight: 800;
+    font-size: 18px;
+    text-transform: uppercase;
+    letter-spacing: .01em;
+  }
+  .plato span {
+    display: block;
+    font-weight: 500;
+    font-size: 13px;
+    text-transform: none;
+    color: var(--suave);
+    letter-spacing: 0;
+    margin-top: 2px;
+  }
+  .precio {
+    margin-left: auto;
+    font-family: "Anton", sans-serif;
+    font-size: 22px;
+    color: var(--amarillo);
+    white-space: nowrap;
+    font-variant-numeric: tabular-nums;
+  }
+  .precio.consultar {
+    font-family: "Archivo", sans-serif;
+    font-weight: 700;
+    font-size: 13px;
+    color: var(--suave);
+  }
+
+  .columnas { display: grid; gap: 0 36px; }
+
+  /* Pie */
+  .pie {
+    margin-top: 34px;
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    background: var(--fondo-2);
+    border: 1px solid var(--linea);
+    border-radius: 22px;
+    padding: 18px 20px;
+    break-inside: avoid;
+  }
+  .pie img { width: 132px; height: 132px; border-radius: 12px; background: #fff; padding: 8px; flex: none; }
+  .pie strong {
+    display: block;
+    font-family: "Anton", sans-serif;
+    font-weight: 400;
+    font-size: 26px;
+    text-transform: uppercase;
+    line-height: 1.05;
+  }
+  .pie strong em { font-style: normal; color: var(--amarillo); }
+  .pie p { color: var(--suave); font-weight: 500; font-size: 15px; margin-top: 6px; line-height: 1.4; }
+  .pie .pago {
+    display: inline-block;
+    margin-top: 10px;
+    background: var(--amarillo);
+    color: var(--fondo);
+    font-weight: 800;
+    font-size: 13px;
+    letter-spacing: .06em;
+    text-transform: uppercase;
+    padding: 5px 12px;
+    border-radius: 999px;
+  }
+  .nota { text-align: center; color: var(--suave); font-size: 12px; margin-top: 18px; }
+
+  @media (min-width: 640px) {
+    .hoja { padding: 48px 40px 56px; }
+    .columnas { grid-template-columns: 1fr 1fr; }
+  }
+
+  /* En pantalla, sin QR (ya lo escanearon) */
+  @media screen { .solo-impreso { display: none; } }
+
+  /* Impresión: carta/A4 en dos páginas */
+  @page { size: A4; margin: 0; }
+  @media print {
+    body { background: var(--fondo); }
+    .hoja {
+      max-width: none;
+      width: 210mm;
+      height: 297mm;
+      padding: 14mm 14mm 12mm;
+      overflow: hidden;
+      page-break-after: always;
+      break-after: page;
+    }
+    .hoja:last-child { page-break-after: auto; break-after: auto; }
+    .columnas { grid-template-columns: 1fr 1fr; }
+    .marca { margin-bottom: 8mm; }
+    .marca h1 { font-size: 64px; }
+    .marca.chica h1 { font-size: 40px; }
+    .marca.chica .la { font-size: 16px; }
+    .marca.chica p { display: none; }
+    .grupo { margin-top: 6mm; }
+    li { padding: 5px 2px; }
+    .pie { margin-top: 7mm; padding: 14px 18px; }
+    .nota { margin-top: 10px; }
+    .solo-pantalla { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<!-- Página 1 -->
+<section class="hoja">
+  <header class="marca">
+    <span class="la">LA ESQUINA</span>
+    <h1>del <em>Sabor</em></h1>
+    <p>Perros · Hamburguesas · Pepitos · Enrollados</p>
+  </header>
+
+  <div class="grupo">
+    <h2>Perros calientes</h2>
+    <div class="columnas">
+      <ul>
+        <li><div class="plato">Sencillo</div><div class="precio">1,5$</div></li>
+        <li><div class="plato">Con queso</div><div class="precio">2$</div></li>
+        <li><div class="plato">Aguacate y queso</div><div class="precio">3$</div></li>
+        <li><div class="plato">Full</div><div class="precio">4$</div></li>
+        <li><div class="plato">Super</div><div class="precio">3,5$</div></li>
+        <li><div class="plato">Polaco</div><div class="precio">5$</div></li>
+        <li><div class="plato">Alemán</div><div class="precio">5$</div></li>
+        <li><div class="plato">Chistorra</div><div class="precio">5$</div></li>
+      </ul>
+      <ul>
+        <li><div class="plato">Plumrose</div><div class="precio">3$</div></li>
+        <li><div class="plato">Gey</div><div class="precio">5$</div></li>
+        <li><div class="plato">Parrilla</div><div class="precio">6$</div></li>
+        <li><div class="plato">Pollo</div><div class="precio">5$</div></li>
+        <li><div class="plato">Carne</div><div class="precio">5$</div></li>
+        <li><div class="plato">Chuleta</div><div class="precio">5$</div></li>
+        <li><div class="plato">Jumbo</div><div class="precio">6$</div></li>
+        <li><div class="plato">Choriperro</div><div class="precio">15$</div></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="columnas">
+    <div class="grupo">
+      <h2>Hamburguesas</h2>
+      <ul>
+        <li><div class="plato">Carne</div><div class="precio">6$</div></li>
+        <li><div class="plato">Especial de carne</div><div class="precio">7$</div></li>
+        <li><div class="plato">Pollo</div><div class="precio">8$</div></li>
+        <li><div class="plato">Chuleta</div><div class="precio">8$</div></li>
+        <li><div class="plato">Chorizo</div><div class="precio">6$</div></li>
+      </ul>
+    </div>
+    <div class="grupo">
+      <h2>Hamburguesas <small>mixtas</small></h2>
+      <ul>
+        <li><div class="plato">Carne / pollo</div><div class="precio">12$</div></li>
+        <li><div class="plato">Pollo / chuleta</div><div class="precio">12$</div></li>
+        <li><div class="plato">Carne / chuleta</div><div class="precio">12$</div></li>
+        <li><div class="plato">Pollo / chorizo</div><div class="precio">12$</div></li>
+        <li><div class="plato">Carne / chorizo</div><div class="precio">12$</div></li>
+        <li><div class="plato">Doble carne</div><div class="precio">10$</div></li>
+        <li><div class="plato">La 4 quesos</div><div class="precio">10$</div></li>
+        <li><div class="plato">La llanera</div><div class="precio">10$</div></li>
+        <li><div class="plato">La perversa</div><div class="precio">16$</div></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- Página 2 -->
+<section class="hoja">
+  <header class="marca chica solo-impreso">
+    <span class="la">LA ESQUINA</span>
+    <h1>del <em>Sabor</em></h1>
+  </header>
+
+  <div class="columnas">
+    <div class="grupo">
+      <h2>Pepitos</h2>
+      <ul>
+        <li><div class="plato">Pollo</div><div class="precio">13$</div></li>
+        <li><div class="plato">Carne</div><div class="precio">13$</div></li>
+        <li><div class="plato">Chuleta</div><div class="precio">13$</div></li>
+        <li><div class="plato">Chorizo</div><div class="precio">13$</div></li>
+        <li><div class="plato">Mini pepito</div><div class="precio">9$</div></li>
+      </ul>
+    </div>
+    <div class="grupo">
+      <h2>Pepitos <small>mixtos</small></h2>
+      <ul>
+        <li><div class="plato">Carne / pollo</div><div class="precio">15$</div></li>
+        <li><div class="plato">Pollo / chuleta</div><div class="precio">15$</div></li>
+        <li><div class="plato">Chuleta / chorizo</div><div class="precio">15$</div></li>
+        <li><div class="plato">Carne / chuleta</div><div class="precio">15$</div></li>
+        <li><div class="plato">Explosivo</div><div class="precio">18$</div></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="columnas">
+    <div class="grupo">
+      <h2>Enrollados</h2>
+      <ul>
+        <li><div class="plato">Pollo</div><div class="precio">9$</div></li>
+        <li><div class="plato">Carne</div><div class="precio">9$</div></li>
+        <li><div class="plato">Chuleta</div><div class="precio">9$</div></li>
+      </ul>
+    </div>
+    <div class="grupo">
+      <h2>Enrollados <small>mixtos</small></h2>
+      <ul>
+        <li><div class="plato">Carne / pollo</div><div class="precio">9$</div></li>
+        <li><div class="plato">Chuleta / pollo</div><div class="precio">9$</div></li>
+        <li><div class="plato">Carne / chuleta</div><div class="precio">9$</div></li>
+        <li><div class="plato">Chuleta / chorizo</div><div class="precio">9$</div></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="grupo">
+    <h2>Bebidas</h2>
+    <div class="columnas">
+      <ul>
+        <li><div class="plato">Refresco botella</div><div class="precio">1,5$</div></li>
+        <li><div class="plato">Refresco de litro</div><div class="precio">2,5$</div></li>
+        <li><div class="plato">Refresco de lata</div><div class="precio">2$</div></li>
+      </ul>
+      <ul>
+        <li><div class="plato">Agua</div><div class="precio">1$</div></li>
+        <li><div class="plato">Malta</div><div class="precio">1$</div></li>
+        <li><div class="plato">Gatorade</div><div class="precio consultar">Preguntar</div></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="pie">
+    <img class="solo-impreso" src="qr-menu.svg" alt="Código QR del menú">
+    <div>
+      <strong>Pregunta por <em>las promos</em> del día</strong>
+      <p class="solo-impreso">Escanea el código y lleva el menú en tu teléfono.</p>
+      <p class="solo-pantalla">Combos de perros, enrollados y refresco. Pídelos en el puesto.</p>
+      <span class="pago">Aceptamos Pago Móvil</span>
+    </div>
+  </div>
+  <p class="nota">Precios en dólares, sujetos a cambio.</p>
+</section>
+
+</body>
+</html>
