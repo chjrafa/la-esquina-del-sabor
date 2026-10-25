@@ -130,6 +130,31 @@
 
   .columnas { display: grid; gap: 0 36px; }
 
+
+  /* Fotos */
+  .fotos {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 10px;
+    margin-bottom: 6px;
+  }
+  .fotos img {
+    width: 100%;
+    height: 190px;
+    object-fit: cover;
+    border-radius: 18px;
+    border: 2px solid rgba(255, 46, 147, .55);
+    box-shadow: 0 10px 30px rgba(255, 46, 147, .25);
+  }
+  .fotos img:last-child { object-position: 50% 40%; }
+  .burger {
+    display: block;
+    width: 78%;
+    max-width: 260px;
+    margin: 16px auto 0;
+    filter: drop-shadow(0 14px 18px rgba(0, 0, 0, .55)) drop-shadow(0 0 24px rgba(255, 46, 147, .3));
+  }
+
   /* Pie */
   .pie {
     margin-top: 34px;
@@ -190,7 +215,14 @@
     }
     .hoja:last-child { page-break-after: auto; break-after: auto; }
     .columnas { grid-template-columns: 1fr 1fr; }
-    .marca { margin-bottom: 8mm; }
+    .marca { margin-bottom: 6mm; }
+    .fotos img { height: 44mm; }
+    .burger { width: 58mm; margin-top: 3mm; }
+    .hoja:first-child li { padding: 4px 2px; }
+    .hoja:first-child .plato { font-size: 15px; line-height: 1.2; }
+    .hoja:first-child .precio { font-size: 19px; line-height: 1.1; }
+    .hoja:first-child .grupo { margin-top: 5mm; }
+    .hoja:first-child .marca h1 { font-size: 56px; }
     .marca h1 { font-size: 64px; }
     .marca.chica h1 { font-size: 40px; }
     .marca.chica .la { font-size: 16px; }
@@ -221,6 +253,11 @@
     <h1>del <em>Sabor</em></h1>
     <p>Perros · Hamburguesas · Pepitos · Enrollados</p>
   </header>
+
+  <div class="fotos">
+    <img src="img/perros.jpg" alt="Perros calientes con papitas, queso y salsas">
+    <img src="img/perro-full.jpg" alt="Perro full con aguacate, maíz y tocineta">
+  </div>
 
   <div class="grupo">
     <h2>Perros calientes</h2>
@@ -258,6 +295,7 @@
         <li><div class="plato">Chuleta</div><div class="precio">8€</div></li>
         <li><div class="plato">Chorizo</div><div class="precio">6€</div></li>
       </ul>
+      <img class="burger" src="img/hamburguesa.webp" alt="Hamburguesa con queso derretido y tocineta">
     </div>
     <div class="grupo">
       <h2>Hamburguesas <small>mixtas</small></h2>
