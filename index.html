@@ -222,6 +222,50 @@
   }
 
 
+
+  /* ---------- Carrito venezolano ---------- */
+  .toldo {
+    position: absolute; top: 0; left: 0; right: 0; z-index: 4;
+    height: 40px;
+    background: repeating-linear-gradient(90deg, var(--magenta) 0 36px, #fff6e8 36px 72px);
+    -webkit-mask: linear-gradient(#000 0 0) top / 100% calc(100% - 17px) no-repeat, radial-gradient(circle 18px at 50% 0, #000 97%, transparent 100%) left bottom / 36px 18px repeat-x;
+            mask: linear-gradient(#000 0 0) top / 100% calc(100% - 17px) no-repeat, radial-gradient(circle 18px at 50% 0, #000 97%, transparent 100%) left bottom / 36px 18px repeat-x;
+  }
+  .hoja { padding-top: 64px; }
+  .chorreo {
+    position: absolute; z-index: -1;
+    left: -6%; top: 6px; width: 112%; height: 90px;
+    fill: none; stroke-width: 7; stroke-linecap: round;
+    opacity: .9;
+  }
+  .cabecera { isolation: isolate; }
+  .dicho {
+    display: inline-block;
+    margin-left: 4px;
+    font-family: "Permanent Marker", cursive;
+    font-size: 17px;
+    color: var(--amarillo);
+    transform: rotate(-3deg) translateY(-4px);
+    position: relative; z-index: 2;
+    white-space: nowrap;
+  }
+  .banda h2 { display: flex; align-items: flex-end; flex-wrap: wrap; gap: 0 10px; }
+  .memoria {
+    position: relative; z-index: 2;
+    margin-top: 30px;
+    border-radius: 18px;
+    overflow: hidden;
+    border: 2px solid rgba(255, 46, 147, .6);
+  }
+  .memoria img { width: 100%; height: 200px; object-fit: cover; object-position: 50% 40%; }
+  .memoria figcaption {
+    position: absolute; left: 0; right: 0; bottom: 0;
+    padding: 30px 16px 12px;
+    background: linear-gradient(transparent, rgba(20, 6, 36, .92));
+    font-size: 13px; color: var(--suave);
+  }
+  .memoria figcaption strong { display: block; font-family: "Anton", sans-serif; font-weight: 400; font-size: 22px; color: #fff; text-transform: uppercase; }
+
   /* ---------- Promos ---------- */
   .tarjetas { display: grid; gap: 14px; position: relative; z-index: 2; margin-top: 14px; }
   .promo {
@@ -346,15 +390,21 @@
     .precio { width: 44px; height: 27px; font-size: 14px; }
     .sub { font-size: 16px; margin: 6px 0 0; }
     .perros { margin-top: 12mm; }
-    .perros .foto { width: 64mm; bottom: -1mm; right: -2mm; }
+    .perros .foto { width: 62mm; bottom: -5mm; right: -13mm; transform: rotate(-4deg); }
     .pepitos { margin-top: 6mm; }
     .pepitos .foto { width: 70mm; bottom: -1mm; right: -3mm; }
     .placa-chica { text-align: left; }
     .seccion + .seccion { margin-top: 9mm; }
-    .pagina-2 li { padding: 6.5px 0; }
-    .pagina-2 .seccion + .seccion { margin-top: 13mm; }
+    .pagina-2 li { padding: 4.5px 0; }
+    .pagina-2 .seccion + .seccion { margin-top: 8mm; }
     .pagina-2 .pepitos .foto { width: 78mm; }
-    .pagina-2 .nota { margin-top: 12mm; }
+    .pagina-2 .nota { margin-top: 4mm; }
+    .hoja { padding-top: 19mm; }
+    .toldo { height: 12mm; }
+    .chorreo { top: 2mm; height: 26mm; }
+    .dicho { font-size: 14px; }
+    .memoria { margin-top: 7mm; }
+    .memoria img { height: 44mm; }
     .hamburguesa-foto { width: 58mm; margin-top: 5mm; }
     .placa-chica .placa { padding: 8px 24px 10px; }
     .placa-chica .placa .nombre { font-size: 38px; }
@@ -382,7 +432,13 @@
 
 <!-- Página 1 -->
 <section class="hoja">
+  <div class="toldo" aria-hidden="true"></div>
   <header class="cabecera">
+    <svg class="chorreo" viewBox="0 0 600 120" aria-hidden="true" preserveAspectRatio="none">
+      <path d="M0 40 C40 10 60 80 100 50 S160 10 200 50 S260 90 300 50 S360 10 400 50 S460 90 500 50 S560 10 600 40" stroke="#e6392b" />
+      <path d="M0 80 C40 50 60 110 100 85 S160 50 200 85 S260 115 300 85 S360 50 400 85 S460 115 500 85 S560 55 600 75" stroke="#ffc21a" />
+      <path d="M0 62 C50 40 70 90 120 66 S190 36 240 66 S310 96 360 66 S430 36 480 66 S550 92 600 60" stroke="#fff6e8" />
+    </svg>
     <div class="placa">
       <span class="esq"><svg><use href="#esquina"/></svg>LA ESQUINA</span>
       <span class="nombre">del Sabor</span>
@@ -393,8 +449,8 @@
 
   <section class="seccion perros">
     <div class="banda">
-      <span class="num">01</span><h2>Perros<br>calientes</h2>
-      <img class="foto" src="img/perro-chili.webp" alt="Perro caliente con carne y queso derretido">
+      <span class="num">01</span><h2>Perros<br>calientes</h2><span class="dicho">con todo, como en la calle</span>
+      <img class="foto" src="img/perro-venezolano.webp" alt="Perro caliente venezolano con papitas, queso rallado y salsas">
     </div>
     <div class="columnas">
       <ul>
@@ -422,7 +478,7 @@
 
   <section class="seccion">
     <div class="banda">
-      <span class="num">02</span><h2>Hamburguesas</h2>
+      <span class="num">02</span><h2>Hamburguesas</h2><span class="dicho">pa' comer con las dos manos</span>
     </div>
     <div class="columnas">
       <div>
@@ -434,7 +490,7 @@
           <li><span class="plato">Chuleta</span><span class="puntos"></span><span class="precio">8<i>€</i></span></li>
           <li><span class="plato">Chorizo</span><span class="puntos"></span><span class="precio">6<i>€</i></span></li>
         </ul>
-        <img class="hamburguesa-foto" src="img/hamburguesa-cargada.webp" alt="Hamburguesa cargada con tocineta, tomate y lechuga">
+        <img class="hamburguesa-foto" src="img/hamburguesa-huevo.webp" alt="Hamburguesa con huevo frito, tomate y lechuga">
       </div>
       <div>
         <p class="sub">Mixtas</p>
@@ -456,6 +512,7 @@
 
 <!-- Página 2 -->
 <section class="hoja pagina-2">
+  <div class="toldo" aria-hidden="true"></div>
   <header class="cabecera placa-chica solo-impreso">
     <div class="placa">
       <span class="esq"><svg><use href="#esquina"/></svg>LA ESQUINA</span>
@@ -465,7 +522,7 @@
 
   <section class="seccion pepitos">
     <div class="banda">
-      <span class="num">03</span><h2>Pepitos</h2>
+      <span class="num">03</span><h2>Pepitos</h2><span class="dicho">pa' los de buen diente</span>
       <img class="foto" src="img/pepito.webp" alt="Pepito de carne en pan">
     </div>
     <div class="columnas">
@@ -494,7 +551,7 @@
 
   <section class="seccion enrollados">
     <div class="banda">
-      <span class="num">04</span><h2>Enrollados</h2>
+      <span class="num">04</span><h2>Enrollados</h2><span class="dicho">pa' llevar caminando</span>
     </div>
     <div class="columnas">
       <div>
@@ -519,7 +576,7 @@
 
   <section class="seccion">
     <div class="banda">
-      <span class="num">05</span><h2>Bebidas</h2>
+      <span class="num">05</span><h2>Bebidas</h2><span class="dicho">bien frías</span>
     </div>
     <div class="columnas">
       <ul>
@@ -533,12 +590,17 @@
     </div>
   </section>
 
+  <figure class="memoria">
+    <img src="img/carrito-altamira.jpg" alt="Carrito de perros calientes El Perrito frente al obelisco de Altamira, Caracas">
+    <figcaption><strong>El perro caliente es de la calle.</strong> Carrito "El Perrito" en Altamira, Caracas, siglo XX.</figcaption>
+  </figure>
   <p class="nota">Precios en euros, sujetos a cambio. Fotos de referencia.</p>
-  <p class="creditos">Fotos vía Wikimedia Commons: bryan... from Taipei (CC BY-SA 2.0), Hongreddotbrewhouse y Reixrb (CC BY-SA 3.0).</p>
+  <p class="creditos">Fotos vía Wikimedia Commons: GeraldineRyden, Horacio Cambeiro y Reixrb (CC BY-SA 3.0); carrito de Altamira, Mastercorrector1 (CC0).</p>
 </section>
 
 <!-- Página 3 -->
 <section class="hoja">
+  <div class="toldo" aria-hidden="true"></div>
   <header class="cabecera placa-chica solo-impreso">
     <div class="placa">
       <span class="esq"><svg><use href="#esquina"/></svg>LA ESQUINA</span>
@@ -548,20 +610,20 @@
 
   <section class="seccion promos">
     <div class="banda">
-      <span class="num">06</span><h2>Promos</h2>
+      <span class="num">06</span><h2>Promos</h2><span class="dicho">pa' resolver con los panas</span>
     </div>
     <div class="tarjetas">
       <article class="promo">
         <span class="etiqueta">Promo 1</span>
         <p class="combo">6 perros sencillos <span>+ 1 refresco de litro</span></p>
         <span class="precio grande">10<i>€</i></span>
-        <img src="img/perro-chili.webp" alt="">
+        <img src="img/perro-venezolano.webp" alt="">
       </article>
       <article class="promo">
         <span class="etiqueta">Promo 2</span>
         <p class="combo">3 perros sencillos <span>+ 1 malta</span></p>
         <span class="precio grande">5<i>€</i></span>
-        <img src="img/perro-chili.webp" alt="">
+        <img src="img/perro-venezolano.webp" alt="">
       </article>
       <article class="promo">
         <span class="etiqueta">Promo 3</span>
@@ -572,13 +634,13 @@
         <span class="etiqueta">Promo 4</span>
         <p class="combo">4 perros con aguacate, maíz y queso <span>+ 1 refresco de litro</span></p>
         <span class="precio grande">10<i>€</i></span>
-        <img src="img/perro-chili.webp" alt="">
+        <img src="img/perro-venezolano.webp" alt="">
       </article>
       <article class="promo ancha">
         <span class="etiqueta">Promo 5</span>
         <p class="combo">2 hamburguesas de pollo o de carne <span>+ 1 refresco de litro</span></p>
         <span class="precio grande">16<i>€</i></span>
-        <img src="img/hamburguesa-cargada.webp" alt="">
+        <img src="img/hamburguesa-huevo.webp" alt="">
       </article>
     </div>
   </section>
