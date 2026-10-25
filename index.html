@@ -221,6 +221,53 @@
     filter: drop-shadow(0 18px 20px rgba(0, 0, 0, .6)) drop-shadow(0 0 26px rgba(255, 46, 147, .35));
   }
 
+
+  /* ---------- Promos ---------- */
+  .tarjetas { display: grid; gap: 14px; position: relative; z-index: 2; margin-top: 14px; }
+  .promo {
+    position: relative;
+    min-height: 150px;
+    padding: 16px 18px 18px;
+    border-radius: 20px;
+    background: linear-gradient(160deg, rgba(255, 46, 147, .22), rgba(34, 9, 61, .92) 55%);
+    border: 2px solid rgba(255, 46, 147, .7);
+    overflow: hidden;
+  }
+  .promo .etiqueta {
+    display: inline-block;
+    font-family: "Anton", sans-serif;
+    font-size: 15px;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    background: var(--magenta);
+    color: #fff;
+    padding: 3px 12px 2px;
+    border-radius: 999px;
+  }
+  .promo .combo {
+    position: relative; z-index: 2;
+    margin-top: 10px;
+    max-width: 62%;
+    font-family: "Anton", sans-serif;
+    font-size: 25px;
+    line-height: 1.02;
+    text-transform: uppercase;
+  }
+  .promo .combo span { display: block; margin-top: 6px; font-family: "Archivo", sans-serif; font-weight: 800; font-size: 14px; color: var(--amarillo); letter-spacing: .02em; }
+  .precio.grande { position: absolute; z-index: 3; top: 12px; right: 14px; width: 82px; height: 54px; font-size: 30px; transform: rotate(-6deg); box-shadow: 0 0 0 3px var(--amarillo), 0 4px 0 rgba(0, 0, 0, .4); }
+  .promo img {
+    position: absolute; z-index: 1;
+    right: -18px; bottom: -14px;
+    width: 52%;
+    transform: rotate(-8deg);
+    filter: drop-shadow(0 12px 14px rgba(0, 0, 0, .6));
+  }
+  .promo.ancha img { width: 34%; right: 4px; bottom: -22px; transform: rotate(6deg); }
+  @media (min-width: 640px) {
+    .tarjetas { grid-template-columns: 1fr 1fr; }
+    .promo.ancha { grid-column: 1 / -1; }
+  }
+
   /* ---------- Pie ---------- */
   .pie {
     position: relative;
@@ -299,13 +346,16 @@
     .precio { width: 44px; height: 27px; font-size: 14px; }
     .sub { font-size: 16px; margin: 6px 0 0; }
     .perros { margin-top: 12mm; }
-    .perros .foto { width: 74mm; bottom: -2mm; right: -3mm; }
+    .perros .foto { width: 64mm; bottom: -1mm; right: -2mm; }
     .pepitos { margin-top: 6mm; }
     .pepitos .foto { width: 70mm; bottom: -1mm; right: -3mm; }
     .placa-chica { text-align: left; }
     .seccion + .seccion { margin-top: 9mm; }
-    .hoja + .hoja li { padding: 4px 0; }
-    .hamburguesa-foto { width: 72mm; margin-top: 6mm; }
+    .pagina-2 li { padding: 6.5px 0; }
+    .pagina-2 .seccion + .seccion { margin-top: 13mm; }
+    .pagina-2 .pepitos .foto { width: 78mm; }
+    .pagina-2 .nota { margin-top: 12mm; }
+    .hamburguesa-foto { width: 58mm; margin-top: 5mm; }
     .placa-chica .placa { padding: 8px 24px 10px; }
     .placa-chica .placa .nombre { font-size: 38px; }
     .placa-chica .placa .esq { font-size: 11px; }
@@ -314,6 +364,12 @@
     .pie strong { font-size: 25px; }
     .nota { margin-top: 8px; }
     .solo-pantalla { display: none !important; }
+    .tarjetas { grid-template-columns: 1fr 1fr; gap: 5mm; margin-top: 6mm; }
+    .promo { min-height: 57mm; }
+    .promo.ancha { grid-column: 1 / -1; min-height: 50mm; }
+    .promo img { width: 44%; }
+    .promo.ancha img { width: 30%; }
+    .promo .combo { font-size: 24px; }
   }
 </style>
 </head>
@@ -338,7 +394,7 @@
   <section class="seccion perros">
     <div class="banda">
       <span class="num">01</span><h2>Perros<br>calientes</h2>
-      <img class="foto" src="img/perro.webp" alt="Perro caliente con salsas y queso rallado">
+      <img class="foto" src="img/perro-chili.webp" alt="Perro caliente con carne y queso derretido">
     </div>
     <div class="columnas">
       <ul>
@@ -378,7 +434,7 @@
           <li><span class="plato">Chuleta</span><span class="puntos"></span><span class="precio">8<i>€</i></span></li>
           <li><span class="plato">Chorizo</span><span class="puntos"></span><span class="precio">6<i>€</i></span></li>
         </ul>
-        <img class="hamburguesa-foto" src="img/hamburguesa.webp" alt="Hamburguesa con queso">
+        <img class="hamburguesa-foto" src="img/hamburguesa-cargada.webp" alt="Hamburguesa cargada con tocineta, tomate y lechuga">
       </div>
       <div>
         <p class="sub">Mixtas</p>
@@ -399,7 +455,7 @@
 </section>
 
 <!-- Página 2 -->
-<section class="hoja">
+<section class="hoja pagina-2">
   <header class="cabecera placa-chica solo-impreso">
     <div class="placa">
       <span class="esq"><svg><use href="#esquina"/></svg>LA ESQUINA</span>
@@ -419,7 +475,7 @@
           <li><span class="plato">Pollo</span><span class="puntos"></span><span class="precio">13<i>€</i></span></li>
           <li><span class="plato">Carne</span><span class="puntos"></span><span class="precio">13<i>€</i></span></li>
           <li><span class="plato">Chuleta</span><span class="puntos"></span><span class="precio">13<i>€</i></span></li>
-          <li><span class="plato">Chorizo</span><span class="puntos"></span><span class="precio">13<i>€</i></span></li>
+          <li><span class="plato">Chorizo</span><span class="puntos"></span><span class="precio">12<i>€</i></span></li>
           <li><span class="plato">Mini pepito</span><span class="puntos"></span><span class="precio">9<i>€</i></span></li>
         </ul>
       </div>
@@ -469,27 +525,75 @@
       <ul>
         <li><span class="plato">Refresco botella</span><span class="puntos"></span><span class="precio">1,5<i>€</i></span></li>
         <li><span class="plato">Refresco de litro</span><span class="puntos"></span><span class="precio">2,5<i>€</i></span></li>
-        <li><span class="plato">Refresco de lata</span><span class="puntos"></span><span class="precio">2<i>€</i></span></li>
       </ul>
       <ul>
         <li><span class="plato">Agua</span><span class="puntos"></span><span class="precio">1<i>€</i></span></li>
         <li><span class="plato">Malta</span><span class="puntos"></span><span class="precio">1<i>€</i></span></li>
-        <li><span class="plato">Gatorade</span><span class="puntos"></span><span class="precio consultar">Preguntar</span></li>
       </ul>
+    </div>
+  </section>
+
+  <p class="nota">Precios en euros, sujetos a cambio. Fotos de referencia.</p>
+  <p class="creditos">Fotos vía Wikimedia Commons: bryan... from Taipei (CC BY-SA 2.0), Hongreddotbrewhouse y Reixrb (CC BY-SA 3.0).</p>
+</section>
+
+<!-- Página 3 -->
+<section class="hoja">
+  <header class="cabecera placa-chica solo-impreso">
+    <div class="placa">
+      <span class="esq"><svg><use href="#esquina"/></svg>LA ESQUINA</span>
+      <span class="nombre">del Sabor</span>
+    </div>
+  </header>
+
+  <section class="seccion promos">
+    <div class="banda">
+      <span class="num">06</span><h2>Promos</h2>
+    </div>
+    <div class="tarjetas">
+      <article class="promo">
+        <span class="etiqueta">Promo 1</span>
+        <p class="combo">6 perros sencillos <span>+ 1 refresco de litro</span></p>
+        <span class="precio grande">10<i>€</i></span>
+        <img src="img/perro-chili.webp" alt="">
+      </article>
+      <article class="promo">
+        <span class="etiqueta">Promo 2</span>
+        <p class="combo">3 perros sencillos <span>+ 1 malta</span></p>
+        <span class="precio grande">5<i>€</i></span>
+        <img src="img/perro-chili.webp" alt="">
+      </article>
+      <article class="promo">
+        <span class="etiqueta">Promo 3</span>
+        <p class="combo">2 enrollados mixtos <span>+ 1 refresco de litro</span></p>
+        <span class="precio grande">18<i>€</i></span>
+      </article>
+      <article class="promo">
+        <span class="etiqueta">Promo 4</span>
+        <p class="combo">4 perros con aguacate, maíz y queso <span>+ 1 refresco de litro</span></p>
+        <span class="precio grande">10<i>€</i></span>
+        <img src="img/perro-chili.webp" alt="">
+      </article>
+      <article class="promo ancha">
+        <span class="etiqueta">Promo 5</span>
+        <p class="combo">2 hamburguesas de pollo o de carne <span>+ 1 refresco de litro</span></p>
+        <span class="precio grande">16<i>€</i></span>
+        <img src="img/hamburguesa-cargada.webp" alt="">
+      </article>
     </div>
   </section>
 
   <div class="pie">
     <img class="qr solo-impreso" src="qr-menu.svg" alt="Código QR del menú">
     <div>
-      <strong>Pregunta por <em>las promos</em> del día</strong>
-      <p class="solo-impreso">Escanea el código y lleva el menú en tu teléfono.</p>
-      <p class="solo-pantalla">Combos de perros, enrollados y refresco. Pídelos en el puesto.</p>
+      <strong class="solo-impreso">Lleva el menú <em>en tu teléfono</em></strong>
+      <strong class="solo-pantalla">Pide en <em>la esquina</em></strong>
+      <p class="solo-impreso">Escanea el código y compártelo con tu gente.</p>
+      <p class="solo-pantalla">Todo se prepara al momento en el puesto.</p>
       <span class="pago">Aceptamos Pago Móvil</span>
     </div>
   </div>
-  <p class="nota">Precios en euros, sujetos a cambio. Fotos de referencia.</p>
-  <p class="creditos">Fotos: PapiPijuan (CC BY-SA 4.0), Reixrb (CC BY-SA 3.0), vía Wikimedia Commons; Renee Comet / NCI (dominio público).</p>
+  <p class="nota">Precios en euros, sujetos a cambio.</p>
 </section>
 
 </body>
